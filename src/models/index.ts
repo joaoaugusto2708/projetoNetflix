@@ -1,4 +1,4 @@
-import { Category } from './category'
+import { Category } from './Category'
 import { Course } from './Course'
 import { Episode } from './Episode'
 
