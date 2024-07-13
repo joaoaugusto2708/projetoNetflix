@@ -1,22 +1,22 @@
-import express from "express"
-import { sequelize } from "./database";
-import { adminJs, adminJsRouter } from "./admin";
+import express from 'express'
+import { sequelize } from './database'
+import { router } from './routes'
+import { adminJs, adminJsRouter } from './admin'
 
-const app = express();
+const app = express()
 
 app.use(express.static('public'))
-//app.use(caminho, rotas)
+
+app.use(router)
+
 app.use(adminJs.options.rootPath, adminJsRouter)
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.port || 3000
 
-app.listen(PORT, () => {
-    sequelize.authenticate().then(() => {
-        console.log("Conectado ao banco");
-    }).catch(() => {
-        console.error("Conexão falhou");
-    })
-    console.log(`Iniciado na porta ${PORT}`)
-});
+app.listen(PORT, async () => {
+  await sequelize.authenticate().then(() => {
+    console.log('DB connection successfull.')
+  })
 
-
+  console.log(`Server started successfuly at port ${PORT}.`)
+})
