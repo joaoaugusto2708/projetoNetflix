@@ -6,7 +6,7 @@ Category.hasMany(Course)
 
 Course.belongsTo(Category)
 Course.hasMany(Episode)
-
+Category.hasMany(Course, { as: 'courses' })
 Episode.belongsTo(Course)
 
 export {
